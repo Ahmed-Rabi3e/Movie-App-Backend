@@ -118,3 +118,21 @@ export const deleteMovie = async (req, res) => {
         res.status(500).send({ message: error.message })
     }
 };
+
+//user make rating
+export const rateMovie = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { rating } = req.body;
+        const movie = await Movie.findById(id);
+        if (!movie) {
+            return res.status(404).send({ msg: 'Movie Not Found' })
+        }
+        movie.rating = rating;
+        await movie.save();
+        res.status(200).send({ message: 'Movie Rated Succussfully' })
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).send({ message: error.message })
+    }
+};

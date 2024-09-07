@@ -18,6 +18,11 @@ const movieSchema = mongoose.Schema(
             type: String,
             required: true,
         },
+        rating: {
+            type: Number,
+            min: 1,
+            max: 10
+        }
     },
     {
         timestamps: true,
